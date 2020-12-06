@@ -52,3 +52,14 @@ with open(budget_csv, "r") as budget_file:
 
 # write to a .txt file
 output_txt = "pybank_output.txt"
+
+with open(output_txt, "w", newline ="") as out_file:
+    output_txt_writer = csv.writer(out_file)
+
+    output_txt_writer.writerow(["Financial Analysis"])
+    output_txt_writer.writerow(["----------------------------"])
+    output_txt_writer.writerow([f"Total Months: {months_total}"])
+    output_txt_writer.writerow([f"Total: ${profit_loss_total}"])
+    output_txt_writer.writerow([f"Average Change: ${round(sum(difference)/len(difference),2)}"])
+    output_txt_writer.writerow([f"Greatest Increase in Profits: {p_l_month[difference.index(max_diff) + 1]} (${max_diff})"])
+    output_txt_writer.writerow([f"Greatest Decrease in Profits: {p_l_month[difference.index(min_diff) + 1]} (${min_diff})"])   
