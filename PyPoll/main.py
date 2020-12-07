@@ -29,16 +29,16 @@ with open(election_csv, "r") as election_file:
         votes_total += 1
         if row[2] == "Khan":
             khan_votes += 1
-            votes_tally["Khan"] = khan_votes
+            votes_tally[row[2]] = khan_votes
         if row[2] == "Correy":
             correy_votes += 1
-            votes_tally["Correy"] = correy_votes
+            votes_tally[row[2]] = correy_votes
         if row[2] == "Li":
             li_votes += 1
-            votes_tally["Li"] = li_votes
+            votes_tally[row[2]] = li_votes
         if row[2] == "O'Tooley":
             otooley_votes += 1
-            votes_tally["O'Tooley"] = otooley_votes
+            votes_tally[row[2]] = otooley_votes
         
     khan_percent = (khan_votes / votes_total) * 100
     correy_percent = (correy_votes / votes_total) * 100
@@ -59,7 +59,7 @@ with open(election_csv, "r") as election_file:
     print(f"-------------------------")
     print(f"Winner: {winner}")
     print(f"-------------------------")
-
+    print(votes_tally)
 
 # summate each candidate's dictionary and append that value to a list 
 # add each candidate's name to a separate list 
