@@ -16,42 +16,50 @@ with open(election_csv, "r") as election_file:
     header = next(election_csv_reader)
 
     # Variables to calculate total months, net total profit/loss
-    votes_total = int()
-    khan_votes = {}   
-    correy_votes = {}
-    li_votes = {}
-    otooley_votes = {}
+    votes_total = 0
+    khan_votes = 0   
+    correy_votes = 0
+    li_votes = 0
+    otooley_votes = 0
+    votes_tally = {}
 
 
     # Loop through csv data to calculate total votes,
     for row in election_csv_reader:
         votes_total += 1
         if row[2] == "Khan":
-            khan_votes[str(row[0])] = int(1)
+            khan_votes += 1
+            votes_tally["Khan"] = khan_votes
         if row[2] == "Correy":
-            correy_votes[str(row[0])] = int(1)
+            correy_votes += 1
+            votes_tally["Correy"] = correy_votes
         if row[2] == "Li":
-            li_votes[str(row[0])] = int(1)
+            li_votes += 1
+            votes_tally["Li"] = li_votes
         if row[2] == "O'Tooley":
-            otooley_votes[str(row[0])] = int(1)
-    
-    khan_percent = (sum(khan_votes.values()) / votes_total) * 100
-    correy_percent = (sum(correy_votes.values()) / votes_total) * 100
-    li_percent = (sum(li_votes.values()) / votes_total) * 100
-    otooley_percent = (sum(otooley_votes.values()) / votes_total) * 100
+            otooley_votes += 1
+            votes_tally["O'Tooley"] = otooley_votes
+        
+    khan_percent = (khan_votes / votes_total) * 100
+    correy_percent = (correy_votes / votes_total) * 100
+    li_percent = (li_votes / votes_total) * 100
+    otooley_percent = (otooley_votes / votes_total) * 100
+
+    winner = max(votes_tally, key=votes_tally.get)
+
 
     print(f"Election Results")
     print(f"-------------------------")
     print(f"Total Votes: {votes_total}")
     print(f"-------------------------")
-    print(f"Khan: {round(khan_percent,3)}% ({sum(khan_votes.values())})")
-    print(f"Correy: {round(correy_percent,3)}% ({sum(correy_votes.values())})")
-    print(f"Li: {round(li_percent,3)}% ({sum(li_votes.values())})")
-    print(f"O'Tooley: {round(otooley_percent,3)}% ({sum(otooley_votes.values())})")
+    print(f"Khan: {round(khan_percent,3)}% ({khan_votes})")
+    print(f"Correy: {round(correy_percent,3)}% ({correy_votes})")
+    print(f"Li: {round(li_percent,3)}% ({li_votes})")
+    print(f"O'Tooley: {round(otooley_percent,3)}% ({otooley_votes})")
     print(f"-------------------------")
-    print(f"Winner: ")
+    print(f"Winner: {winner}")
     print(f"-------------------------")
-    
+
 
 # summate each candidate's dictionary and append that value to a list 
 # add each candidate's name to a separate list 
