@@ -15,7 +15,8 @@ with open(election_csv, "r") as election_file:
     # Skip header row
     header = next(election_csv_reader)
 
-    # Variables to calculate total months, net total profit/loss
+    # Variables to calculate: total votes, votes per candidate, 
+        # Dictionary with candidate names as keys and their total vote as values
     votes_total = 0
     khan_votes = 0   
     correy_votes = 0
@@ -24,7 +25,8 @@ with open(election_csv, "r") as election_file:
     votes_tally = {}
 
 
-    # Loop through csv data to calculate total votes,
+    # Loop through csv data to calculate total votes, votes per candidate
+        # and incrementally updating the votes tally dictionary with each candidate's votes 
     for row in election_csv_reader:
         votes_total += 1
         if row[2] == "Khan":
@@ -39,15 +41,19 @@ with open(election_csv, "r") as election_file:
         if row[2] == "O'Tooley":
             otooley_votes += 1
             votes_tally[row[2]] = otooley_votes
-        
+
+
+    # Calculate vote percentage for each candidate     
     khan_percent = (khan_votes / votes_total) * 100
     correy_percent = (correy_votes / votes_total) * 100
     li_percent = (li_votes / votes_total) * 100
     otooley_percent = (otooley_votes / votes_total) * 100
 
+    # Searching for the max value in the votes tally dictionary 
+        # to get the key (winning candidate)
     winner = max(votes_tally, key=votes_tally.get)
 
-
+    # Output election results to Terminal
     print(f"Election Results")
     print(f"-------------------------")
     print(f"Total Votes: {votes_total}")
@@ -60,9 +66,10 @@ with open(election_csv, "r") as election_file:
     print(f"Winner: {winner}")
     print(f"-------------------------")
 
-# write to a .txt file
+# Write to a .txt file
     output_txt = os.path.join("Analysis", "pypoll_output.txt")
 
+# Edit the .txt file with the election results
 with open(output_txt, "w", newline ="") as out_file:
     output_txt_writer = csv.writer(out_file)
 
