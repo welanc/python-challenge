@@ -48,7 +48,7 @@ with open(budget_csv, "r") as budget_file:
     print(f"Total: ${profit_loss_total}")
 
     # Print calculated average difference in profit/loss to Terminal
-    print(f"Average Change: ${round(sum(difference)/len(difference),2)}")
+    print(f"Average Change: ${sum(difference)/len(difference):.2f}")
     
     # Print biggest positive/negative difference in profit/loss
     # Use .index to find corresponding month/year of difference in profit/loss. 
@@ -67,6 +67,6 @@ with open(output_txt, "w", newline ="") as out_file:
     output_txt_writer.writerow(["----------------------------"])
     output_txt_writer.writerow([f"Total Months: {months_total}"])
     output_txt_writer.writerow([f"Total: ${profit_loss_total}"])
-    output_txt_writer.writerow([f"Average Change: ${round(sum(difference)/len(difference),2)}"])
+    output_txt_writer.writerow([f"Average Change: ${sum(difference)/len(difference):.2f}"])
     output_txt_writer.writerow([f"Greatest Increase in Profits: {p_l_dict[max_diff]} (${max_diff})"])
     output_txt_writer.writerow([f"Greatest Decrease in Profits: {p_l_dict[min_diff]} (${min_diff})"])   
