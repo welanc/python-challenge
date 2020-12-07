@@ -52,19 +52,28 @@ with open(election_csv, "r") as election_file:
     print(f"-------------------------")
     print(f"Total Votes: {votes_total}")
     print(f"-------------------------")
-    print(f"Khan: {round(khan_percent,3)}% ({khan_votes})")
-    print(f"Correy: {round(correy_percent,3)}% ({correy_votes})")
-    print(f"Li: {round(li_percent,3)}% ({li_votes})")
-    print(f"O'Tooley: {round(otooley_percent,3)}% ({otooley_votes})")
+    print(f"Khan: {khan_percent:.3f}% ({khan_votes})")
+    print(f"Correy: {correy_percent:.3f}% ({correy_votes})")
+    print(f"Li: {li_percent:.3f}% ({li_votes})")
+    print(f"O'Tooley: {otooley_percent:.3f}% ({otooley_votes})")
     print(f"-------------------------")
     print(f"Winner: {winner}")
     print(f"-------------------------")
-    print(votes_tally)
 
-# summate each candidate's dictionary and append that value to a list 
-# add each candidate's name to a separate list 
-# combine both lists into a dictionary: summated votes as the key, candidate names as the values 
-# set a variable equal to the max value of the summated votes
-# use dictionary to find the value associated to the max summated votes key 
+# write to a .txt file
+    output_txt = os.path.join("Analysis", "pypoll_output.txt")
 
+with open(output_txt, "w", newline ="") as out_file:
+    output_txt_writer = csv.writer(out_file)
 
+    output_txt_writer.writerow([f"Election Results"])
+    output_txt_writer.writerow([f"-------------------------"])
+    output_txt_writer.writerow([f"Total Votes: {votes_total}"])
+    output_txt_writer.writerow([f"-------------------------"])
+    output_txt_writer.writerow([f"Khan: {khan_percent:.3f}% ({khan_votes})"])
+    output_txt_writer.writerow([f"Correy: {correy_percent:.3f}% ({correy_votes})"])
+    output_txt_writer.writerow([f"Li: {li_percent:.3f}% ({li_votes})"])
+    output_txt_writer.writerow([f"O'Tooley: {otooley_percent:.3f}% ({otooley_votes})"])
+    output_txt_writer.writerow([f"-------------------------"])
+    output_txt_writer.writerow([f"Winner: {winner}"])
+    output_txt_writer.writerow([f"-------------------------"])
